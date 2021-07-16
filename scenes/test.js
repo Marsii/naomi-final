@@ -36,7 +36,12 @@ class marsii extends Scene {
 		const npcs = {};
 
 		const astShipSheet = loadSpriteSheet('images/marsii/npcs/brokenship.png', 353, 188, 1);
+        //const astShipSheetFixedside = loadSpriteSheet('images/marsii/npcs/fixedshipSide.png', 300, 152, 1);
+        //const astShipSheetQC = loadSpriteSheet('images/marsii/npcs/fixedship.png', 152, 344, 1);
+
 		npcs.astShip = new AstShip(730, 500, astShipSheet);
+        //npcs.astShip.addAnimation('repaired', astShipSheetFixedside);
+        //npcs.astShip.addAnimation('uprighted', astShipSheetQC);
 
 
 		//Liquid Alien States
@@ -56,6 +61,12 @@ class marsii extends Scene {
 		npcs.staticAlien.addAnimation('QC', staticAlienQC);
 		npcs.staticAlien.addAnimation('Bad', staticAlienBad);
 
+		//const cosmicAlienNorm = loadSpriteSheet('images/marsii/npcs/cosmicAlien.png', 64, 130, 6));
+		//const cosmicAlienQC = loadSpriteSheet('images/marsii/npcs/cosmicAlienqc.png', 64, 130, 6);
+
+        //npcs.cosmicAlien = new CosmicAlien(-2700, -570, cosmicAlienNorm);
+        //npcs.cosmicAlien.addAnimation('cosmicQC', cosmicAlienQC);
+
 		this.npcs = npcs;
 
 		this.map = new Map();
@@ -74,6 +85,7 @@ class marsii extends Scene {
 		this.character.changeAnimation('idle');
 		this.character.items['icepick'] = new Item(true); // character starts icepick surfaced
 		this.character.items['emptyBattery'] = new Item(true); // and battery
+
 
 		this.map.setup();
 

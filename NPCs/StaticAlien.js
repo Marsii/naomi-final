@@ -1,6 +1,6 @@
 class StaticAlien extends NPC {
 	constructor(x, y, spriteSheet) {
-		super(x, y, spriteSheet, 'CadetBlue', 'DarkGoldenRod');
+		super(x, y, spriteSheet, 'DarkGoldenRod', 'CadetBlue');
 
 		this.dialog = [
 			/*  0 */ { npc: 'Hi...' },
@@ -29,7 +29,7 @@ class StaticAlien extends NPC {
 
 			/* 16 */ { response: 'Have refill battery [1]partially (safe for the alien, but will take longer and be harder to get home) or [2]completely (unsafe for the alien, but gives you all the energy you need)?', a: 17, b: 19, },
 			/* 17 */ { human: "You will be safe, just touch here.", },
-			/* 18 */ { npc: "*You refill the battery just enough to get home*", item: ['partBattery', 'emptyBattery'], animation: 'QC', next: 22 },
+			/* 18 */ { npc: "*You refill the battery just enough to get home*", item: ['partBattery', 'emptyBattery'], animation: 'QC', next: 23 },
 			/* 19 */ { human: "You'll probably be okay, just touch here.", item: ['fullBattery', 'emptyBattery'] },
 			/* 20 */ { npc: "*You refill the battery completely and the alien disappears*", item: ['fullBattery', 'emptyBattery'], animation: 'Bad', },
 			/* 21 */ { human: "It dropped the chronicle of other aliens, It'll be great to take with me to earth. *You pick it up*", item: ['cJournal'], },
