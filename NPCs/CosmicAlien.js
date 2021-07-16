@@ -1,6 +1,6 @@
 class CosmicAlien extends NPC {
 	constructor(x, y, spriteSheet) {
-		super(x, y, spriteSheet, 'LightCyan', 'Pink');
+		super(x, y, spriteSheet, 'Pink', 'LightCyan' );
 //currently untested - computer unreliable but I still want to try to make progress and migrate the dialogue from the old code. Likely contains mistakes/errors. Still trying to figure out the logic somewhat.
 		this.dialog = [
 			/* 0 */ { npc: "Hello, human. You are a human, correct?" },
@@ -14,18 +14,19 @@ class CosmicAlien extends NPC {
 
             /* You can't get the map without getting the blackhole first so the next conversation should be about that once the need is surfaced */
             
-            /* 8 */ { human: "(I don't have a reason to bother her again yet.)", needsSurfaced: 'blackhole', auto: 9 },
-			/* 9 */ { human: "Hey, do you know where I can get a black hole? I need one to trade for a map"},
+            /* 8 */ { human: "(I don't have a reason to bother her again yet.)",  auto: 9, default: 8 },
+
+			/* 9 */ { needsSurfaced: 'blackhole', human: "Hey, do you know where I can get a black hole? I need one to trade for a map"},
 			/* 10 */ { npc: "Oh! I can make those, I'll give you one for human data.", surface: 'logNeed' },
 			/* 11 */ { human: "Ok great, I should have something that should work on my ship. I'll be back." },
-			/* 12 */ { human: "(I should get a log before I talk to her again.)", needsCollected: 'reallog', auto: 13, needsCollected: 'fakelog', auto: 15, default: 12 },
+			/* 12 */ { human: "(I should get a log before I talk to her again.)", next: [13, 15], default: 12 },
 
 
-			/* 13 */ { npc: "Did you get the info?" },
-            /* 14 */ { human: "*You give her the real log*", auto: 17},
+			/* 13 */ { needsCollected: 'reallog', npc: "Did you get the info?" },
+            /* 14 */ { human: "*You give her the real log*", remove:'reallog', next: 17},
 
-            /* 15 */ { npc: "Did you get the info?" },
-            /* 16 */ { human: "*You give her the fake log*", auto: 17},
+            /* 15 */ { needsCollected: 'fakelog', remove:'fakelog', npc: "Did you get the info?" },
+            /* 16 */ { human: "*You give her the fake log*", next: 17},
 
 
 			/* 17 */ { human: "Yup, here you go." },
@@ -37,7 +38,7 @@ class CosmicAlien extends NPC {
 
             /* Map getting marked*/
 			/* 20 */ { needsCollected:'unmarkedmap', npc: "Oh! I see you have the map, I'll mark it", item:'markedMap', remove:'unmarkedMap'},
-			/* 21 */ { human: "Thank you. *Your map has been marked* ", auto: 19, next: 19  },
+			/* 21 */ { human: "Thank you. *Your map has been marked* ", next: 19  },
 
             /* Finding out about the collectionJournal and surfacing need for astronaut journal */
 			/* 22 */ { needsSurfaced:'cJournal' human: "Hey, you collect information on various different species right?" },
@@ -48,17 +49,17 @@ class CosmicAlien extends NPC {
 			/* 27 */ { npc: "Yeah but a lot of the information in here is personal. Your log is mostly professional. Do you have something more personal?" },
             /* 28 */ { human: "Not on me. I may have a journal in my ship. I was hoping to keep it though." },
 			/* 29 */ { npc: "Well, I'll add it to the collection and you can have that." },
-            /* 30 */ { human: "Ugh, Fine.", surface:'astJournal', auto: 19, next: 19 },
+            /* 30 */ { human: "*sighs* Fine.", surface:'astJournal', next: 19 },
 
             /* Losing astronaut journal and gaining collectionJournal*/
-            /* 31 */ { needsCollected: 'astJournal', human: "Here's my journal", remove:'astJournal' },
-			/* 32 */ { npc: "Awesome! Here's the collection", item:'cJournal' }, 
+            /* 31 */ { needsCollected: 'astJournal', human: "Here's my journal" },
+			/* 32 */ { npc: "Awesome! Here's the collection", item:['cJournal', 'astJournal'] }, //item: ['cJournal', 'astJournal']
             
             /* Obtaining anomaly piece */
             /* 33 */ { needsSurfaced:'anomalyPiece', human: "Hey, you see that... anomaly, behind you?" },
 			/* 34 */ { npc: "Yes. I'm guessing you want a piece?" },
             /* 35 */ { human: "Yeah, can I please have one?" },
-			/* 36 */ { npc: "Sure, no problem", item:'anomalyPiece', auto: 19, next: 19 },
+			/* 36 */ { npc: "Sure, no problem", item:'anomalyPiece', next: 19 },
 
 
 

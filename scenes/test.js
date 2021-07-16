@@ -53,6 +53,7 @@ class marsii extends Scene {
 		npcs.liquidAlien.addAnimation('frozen', liquidAlienFrozen);
 		npcs.liquidAlien.addAnimation('cut', liquidAlienFrozenCut);
 
+        //Static Alien States
 		const staticAlienNorm = loadSpriteSheet('images/marsii/npcs/staticAlien.png', 64, 128, 8);
 		const staticAlienQC = loadSpriteSheet('images/marsii/npcs/staticAlienqc.png', 64, 128, 8);
 		const staticAlienBad = loadSpriteSheet('images/marsii/npcs/staticAlienbqc.png', 64, 128, 8);
@@ -61,11 +62,23 @@ class marsii extends Scene {
 		npcs.staticAlien.addAnimation('QC', staticAlienQC);
 		npcs.staticAlien.addAnimation('Bad', staticAlienBad);
 
-		//const cosmicAlienNorm = loadSpriteSheet('images/marsii/npcs/cosmicAlien.png', 64, 130, 6));
+        //Cosmic Alien States
+		//const cosmicAlienNorm = loadSpriteSheet('images/marsii/npcs/cosmicAlien.png', 64, 130, 6);
 		//const cosmicAlienQC = loadSpriteSheet('images/marsii/npcs/cosmicAlienqc.png', 64, 130, 6);
 
         //npcs.cosmicAlien = new CosmicAlien(-2700, -570, cosmicAlienNorm);
         //npcs.cosmicAlien.addAnimation('cosmicQC', cosmicAlienQC);
+        
+        //Plant Alien States
+        //const plantAlienNorm = loadSpriteSheet('images/marsii/npcs/plantAlien.png', 64, 128, 10);
+		//const plantAlienFix = loadSpriteSheet('images/marsii/npcs/plantAlienF.png', 64, 128, 10);
+
+        //npcs.plantAlien = new PlantAlien(-1700, 500, plantAlienNorm);
+        //npcs.plantAlien.addAnimation('Fixing', plantAlienFix);
+
+        //Creepy Alien State
+        //const creepAlienNorm = loadSpriteSheet('images/marsii/npcs/creepAlienB.png', 252, 252, 5);
+        //npcs.creepAlien = new creepAlien(-1800, 1600, creepAlienNorm);
 
 		this.npcs = npcs;
 
