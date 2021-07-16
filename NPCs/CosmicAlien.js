@@ -30,17 +30,17 @@ class CosmicAlien extends NPC {
 
 			/* 17 */ { human: "Yup, here you go." },
 			/* 18 */ { npc: " Thanks so much human! I really look forward to reading this. Here's a blackhole, be very careful with that.", item: 'blackhole', animation: 'cosmicQC' },
-			/* 19 */ { human: "(She's grateful but has nothing else to say to you right now.)", needsCollected:'unmarkedmap', auto:20, needsSurfaced:'cJournal', auto:22, needsCollected: 'astJournal', auto:31, needsSurfaced:'anomalyPiece', auto:33, default: 19 },
+			/* 19 */ { human: "(She's grateful but has nothing else to say to you right now.)", next: [20, 22, 31, 33], default: 19 },
  /* Do things unsurface automatically after an item is obtained or would that require something like 'removed'? If so I imagine this line wouldn't work right and might end up turning into an odd accidental loop. */
  /* Tbh, I doubt I fully understand the auto function, so this line may just need re-writing eitherway. */            
 
 
             /* Map getting marked*/
-			/* 20 */ { npc: "Oh! I see you have the map, I'll mark it", item:'markedMap', remove:'unmarkedMap'},
+			/* 20 */ { needsCollected:'unmarkedmap', npc: "Oh! I see you have the map, I'll mark it", item:'markedMap', remove:'unmarkedMap'},
 			/* 21 */ { human: "Thank you. *Your map has been marked* ", auto: 19, next: 19  },
 
             /* Finding out about the collectionJournal and surfacing need for astronaut journal */
-			/* 22 */ { human: "Hey, you collect information on various different species right?" },
+			/* 22 */ { needsSurfaced:'cJournal' human: "Hey, you collect information on various different species right?" },
 			/* 23 */ { npc: "That's right." },
             /* 24 */ { human: "Can I have a copy of some of that information?" },
 			/* 25 */ { npc: "Um, maybe. Do you have something you can give me in exchange?" },
@@ -48,14 +48,14 @@ class CosmicAlien extends NPC {
 			/* 27 */ { npc: "Yeah but a lot of the information in here is personal. Your log is mostly professional. Do you have something more personal?" },
             /* 28 */ { human: "Not on me. I may have a journal in my ship. I was hoping to keep it though." },
 			/* 29 */ { npc: "Well, I'll add it to the collection and you can have that." },
-            /* 30 */ { human: "Ugh, Fine.", needsSurfaced:'astJournal', auto: 19, next: 19 },
+            /* 30 */ { human: "Ugh, Fine.", surface:'astJournal', auto: 19, next: 19 },
 
             /* Losing astronaut journal and gaining collectionJournal*/
-            /* 31 */ { human: "Here's my journal", remove:'astJournal' },
+            /* 31 */ { needsCollected: 'astJournal', human: "Here's my journal", remove:'astJournal' },
 			/* 32 */ { npc: "Awesome! Here's the collection", item:'cJournal' }, 
             
             /* Obtaining anomaly piece */
-            /* 33 */ { human: "Hey, you see that... anomaly, behind you?" },
+            /* 33 */ { needsSurfaced:'anomalyPiece', human: "Hey, you see that... anomaly, behind you?" },
 			/* 34 */ { npc: "Yes. I'm guessing you want a piece?" },
             /* 35 */ { human: "Yeah, can I please have one?" },
 			/* 36 */ { npc: "Sure, no problem", item:'anomalyPiece', auto: 19, next: 19 },
