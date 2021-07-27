@@ -19,7 +19,7 @@ class StaticAlien extends NPC {
 			/* 11 */ { npc: '(It has nothing else to say to you right now)', needsCollected: 'emptyBattery', auto: 13, },
 
 			/* should only show if human does not have battery collected */
-			/* 12 */ { human: "I should go get my battery before I talk to it again", needsSurfaced: 'emptyBattery', auto: 11  },
+			/* 12 */ { human: "(I should probably go get my battery before I talk to it again)", needsSurfaced: 'emptyBattery', auto: 11  },
 
 			/* 13 */ { npc: 'Oh, you got something', needsCollected: ['cJournal', 'emptyBattery'], },
 			/* 14 */ { human: "Yup, it's a chronicle of numerous different species, exactly what you wanted." },
@@ -27,7 +27,7 @@ class StaticAlien extends NPC {
 			/* this dialog sets cJournal to false in the original code -- do items need to be removed so they aren't used more than once ? */
 			/* 15 */ { npc: 'Thank you. What do you want me to do?', remove: 'cJournal', },
 
-			/* 16 */ { response: 'Have refill battery [1]partially (safe for the alien, but will take longer and be harder to get home) or [2]completely (unsafe for the alien, but gives you all the energy you need)?', a: 17, b: 19, },
+			/* 16 */ { response: 'Have it refill battery [1]partially (safe for the alien, but will take longer and be harder to get home) or [2]completely (unsafe for the alien, but gives you all the energy you need)?', a: 17, b: 19, },
 			/* 17 */ { human: "You will be safe, just touch here.", },
 			/* 18 */ { npc: "*You refill the battery just enough to get home*", item: ['partBattery', 'emptyBattery'], animation: 'QC', next: 23 },
 			/* 19 */ { human: "You'll probably be okay, just touch here.", item: ['fullBattery', 'emptyBattery'] },
