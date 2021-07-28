@@ -34,7 +34,7 @@ class marsii extends Scene {
 
 		// add npcs here to loop through and display
 		const npcs = {};
-
+        //Astronaut Ship States
 		const astShipSheet = loadSpriteSheet('images/marsii/npcs/brokenship.png', 353, 188, 1);
         const astShipSheetFixedside = loadSpriteSheet('images/marsii/npcs/fixedshipSide.png', 300, 152, 1);
         const astShipSheetQC = loadSpriteSheet('images/marsii/npcs/fixedship.png', 152, 344, 1);
@@ -43,6 +43,9 @@ class marsii extends Scene {
         npcs.astShip.addAnimation('repaired', astShipSheetFixedside);
         npcs.astShip.addAnimation('uprighted', astShipSheetQC);
 
+        //Astronaut Ship States
+        const alienShipSheet = loadSpriteSheet('images/marsii/npcs/ufo.png', 359, 200, 1);
+		npcs.alienShip = new AlienShip(-2240, 500, alienShipSheet);
 
 		//Liquid Alien States
 		const liquidAlienNormal = loadSpriteSheet('images/marsii/npcs/liquidAlien.png', 64, 128, 4);

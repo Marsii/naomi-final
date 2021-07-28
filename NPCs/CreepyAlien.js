@@ -1,7 +1,7 @@
 class CreepyAlien extends NPC {
 	constructor(x, y, spriteSheet) {
 		super(x, y, spriteSheet, 'LightCoral', 'LightCyan');
-//currently untested - computer unreliable but I still want to try to make progress and migrate the dialogue from the old code. Likely contains mistakes/errors. 
+// partially tested - i think i need certain parts of the plant alien's dialogue/route to do further testing
 		this.dialog = [ 
 
 			/* 0 */ { npc: "Greetings! I'm suprised you approached me." },
@@ -29,7 +29,7 @@ class CreepyAlien extends NPC {
 
             /* 18 */ { needsCollected: ['goodDevice'], human: "Here's a device that should make you less intimidating. Hopefully people will be less scared to approach you." },
             /* 19 */ { npc: "Ah, thank you :D! I'll upright your ship by the time you get back to it.", remove:'goodDevice'}, // Alt dialogue: "Ah, thank you :D! , I'll upright it by the time you get back since it's been repaired." - ignore this, I'm not sure if that text in the middle would work
-			/* 20 */ { human: "Thank you", auto: 25 }, // or maybe auto: 21? Depends on if player could wait for fixed device and still steal ship
+			/* 20 */ { human: "Thank you", auto: 21 }, // or maybe auto: 21? Depends on if player could wait for fixed device and still steal ship
             
 
             /* 21 */ { human: "(You have nothing else to say to him currently)", auto: 22, default:21},
