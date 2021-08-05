@@ -33,7 +33,7 @@ class CosmicAlien extends NPC {
 			/* 17 */ { human: "Yup, here you go." },
 			/* 18 */ { npc: " Thanks so much human! I really look forward to reading this. Here's a blackhole, be very careful with that.", item: 'blackHole', animation: 'cosmicQC' },
 
-			/* 19 */ { human: "(She's seems grateful.)"},
+			/* 19 */ { human: "(She's seems content.)"},
             /* 20 */ { human: "(You have nothing else to say to her right now.)", auto: [21, 23, 25, 34], default: 19 },
  /* Do things unsurface automatically after an item is obtained or would that require something like 'removed'? If so I imagine this line wouldn't work right and might end up turning into an odd accidental loop. */
  /* Tbh, I doubt I fully understand the auto function, so this line may just need re-writing eitherway. */            

@@ -1,4 +1,4 @@
-class PlantAlien extends NPC {
+class PlantAlienFixing extends NPC {
 	constructor(x, y, spriteSheet) {
 		super(x, y, spriteSheet, 'MediumSpringGreen', 'LightCyan');
 //currently untested - computer unreliable but I still want to try to make progress and migrate the dialogue from the old code. Likely contains mistakes/errors. 
@@ -15,17 +15,16 @@ class PlantAlien extends NPC {
             /* 8 */ { npc: "Exchange? I was gonna do it for free but whatever, I won't waste this opportunity..." },
 			/* 9 */ { npc: "How about some non-essentials from 'your' ship, and some technology from your species?" },
             /* 10 */ { human: "Umm, I don't really have much of my own tech on me." },
-            /* 11 */ { npc: "Well just give me whatever you can spare. Hm, if you also get me a piece of that anomaly up there I'll fix your ship.", surface: 'anomalyPiece'}, 
-            /* 12 */ { human: "I can probably manage that.", surface:'backupTech' },
+            /* 11 */ { npc: "Well just give me whatever you can spare. Hm, if you also get me a piece of that anomaly up there I'll fix your ship.", surface:'backupLog', surface: 'anomalyPiece' }, 
+            /* 12 */ { human: "I can probably manage that." },
             /* 13 */ { npc: "Great, let me know when you have everything."} ,
 
 
             /* 14 */ { npc: "*They have nothing else to say to you right now.*", auto: 15, default: 14},
 
-            /* 15 */ { needsCollected: ['backupTech', 'anomalyPiece'], npc: "I see you got your tech and the piece. I'll enjoy studying them both. Thanks.", next:16},
+            /* 15 */ { needsCollected: ['backuplog', 'anomalyPiece'], npc: "I see you got your tech and the piece. I'll enjoy studying it both. Thanks.", next:16},
 
             /* 16 */ { npc: "Alright great, I'll start fixing your ship", next:16 },
-            /* 17 */ { npc: "Alright great, I'll start fixing your ship", next:16 },
 
             /*Hmm I'm not quite sure how to progress with this one further. I'd assume using the requirements class could work, but I'm not sure how exactly. */
 
