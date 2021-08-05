@@ -83,6 +83,7 @@ class marsii extends Scene {
         npcs.plantAlien = new PlantAlien(-1700, 500, plantAlienNorm);
         npcs.plantAlien.addAnimation('Fixing', plantAlienFix);
  */
+        //I have an idea, but I'm not sure if it will work.
         //Creepy Alien State
         const creepyAlienNorm = loadSpriteSheet('images/marsii/npcs/creepyAlienB.png', 252, 252, 5);
 
