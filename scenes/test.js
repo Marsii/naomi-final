@@ -81,14 +81,21 @@ class marsii extends Scene {
 		const plantAlienGone = loadSpriteSheet('images/marsii/npcs/plantAlienBlank.png', 64, 128, 1);
 
         npcs.plantAlien = new PlantAlien(-1700, 500, plantAlienNorm);
-        npcs.plantAlien.addAnimation('GoneFixing', plantAlienGone);
+        npcs.plantAlien.addAnimation('goneFixing', plantAlienGone);
+        npcs.plantAlien.addAnimation('returnPlantQC', plantAlienNorm);
 
-/*
+
         //Plant Alien Fixing States
+        const plantAlienStart = loadSpriteSheet('images/marsii/npcs/testBlank.png', 64, 128, 1);
 		const plantAlienFix = loadSpriteSheet('images/marsii/npcs/plantAlienF.png', 64, 128, 10);
-        const plantAlienReturn = loadSpriteSheet('images/marsii/npcs/plantAlienBlank.png', 64, 128, 1);
- */
+        const plantAlienReturn = loadSpriteSheet('images/marsii/npcs/testBlank.png', 64, 128, 1);
+
+        npcs.plantAlienFixing = new PlantAlienFixing (600, 300, plantAlienStart);
+        npcs.plantAlienFixing.addAnimation('plantFixingShip', plantAlienFix);
+        npcs.plantAlienFixing.addAnimation('plantFixDone', plantAlienReturn);
+ 
         //I have an idea, but I'm not sure if it will work.
+
         //Creepy Alien State
         const creepyAlienNorm = loadSpriteSheet('images/marsii/npcs/creepyAlienB.png', 252, 252, 5);
 

@@ -20,26 +20,29 @@ class CreepyAlien extends NPC {
 			/* 13 */ { human: "( I'll have to find something to make him less intimidating)", surface: 'alienDevice'},
 
 
-            /* 14 */ { npc: "(He has nothing else to say to you for now)", auto:[15, 18], default:14 },
+            /* 14 */ { npc: "(He has nothing else to say to you for now)", auto:[15, 19], default:14 },
             
 
-            /* 15 */ { needsCollected: ['badDevice'], human: "Here's a device that should make you less intimidating. Hopefully beings might be less scared to approach you." },
-            /* 16 */ { npc: "Ah, thank you :D! I'm a ~̸̱̳̜̍͝c̶̱̪̳̕ȑ̷̩͚̀̿e̵̝̦̭̽̚ą̷͖͖͖̋͋̚t̶̡͉̩͔́̂̍͝u̵̦̞̇͘r̵̯̭̀é̸̩̘̰̌͋~̵̧̏͠ of my word, I'll upright after it's been repaired. Let me know if you need anything else in the meanwhile.", remove:'badDevice'}, 
-			/* 17 */ { human: "Alright, thanks", auto: 21 },
+            /* 15 */ { needsCollected: ['badDevice'], npc : "Do you want to give him the faulty device?", response: ' [1] Yes || [2] No ', a: 16, b: 14 }, 
 
-            /* 18 */ { needsCollected: ['goodDevice'], human: "Here's a device that should make you less intimidating. Hopefully beings will be less scared to approach you." },
-            /* 19 */ { npc: "Ah, thank you :D! I'll upright your ship by the time you get back to it.", remove:'goodDevice'}, // Alt dialogue: "Ah, thank you :D! , I'll upright it by the time you get back since it's been repaired." - ignore this, I'm not sure if that text in the middle would work
-			/* 20 */ { human: "Thank you", auto: 21 }, // or maybe auto: 21? Depends on if player could wait for fixed device and still steal ship
+            /* 16 */ {human: "Here's a device that should make you less intimidating. Hopefully beings might be less scared to approach you." },
+            /* 17 */ { npc: "Ah, thank you :D! I'm a ~̸̱̳̜̍͝c̶̱̪̳̕ȑ̷̩͚̀̿e̵̝̦̭̽̚ą̷͖͖͖̋͋̚t̶̡͉̩͔́̂̍͝u̵̦̞̇͘r̵̯̭̀é̸̩̘̰̌͋~̵̧̏͠ of my word, I'll upright after it's been repaired. Let me know if you need anything else in the meanwhile.", remove:'badDevice'}, 
+			/* 18 */ { human: "Alright, thanks", auto: 22 },
+
+            /* 19 */ { needsCollected: ['goodDevice'], human: "Here's a device that should make you less intimidating. Hopefully beings will be less scared to approach you." },
+            /* 20 */ { npc: "Ah, thank you :D! I'll upright your ship by the time you get back to it.", remove:'goodDevice'}, // Alt dialogue: "Ah, thank you :D! , I'll upright it by the time you get back since it's been repaired." - ignore this, I'm not sure if that text in the middle would work
+			/* 21 */ { human: "Thank you", auto: 22 },
             
 
-            /* 21 */ { human: "(You have nothing else to say to him currently)", auto: 22, default:21},
-            /* 22 */ { needsCollected: ['frozenMap', 'frozenKey'], human: "Can you please melt the ice around this map and key for me?" },
-            /* 23 */ { npc: "Sure, no problem!", item: ['unmarkedMap', 'frozenMap'], item: ['unfrozenKey', 'frozenKey'] },
-			/* 24 */ { human: "Thanks", auto: 25 },
+            /* 22 */ { human: "(You have nothing else to say to him currently)", auto: 23, default:22},
+
+            /* 23 */ { needsCollected: ['frozenMap', 'frozenKey'], human: "Can you please melt the ice around this map and key for me?" },
+            /* 24 */ { npc: "Sure, no problem!", item: ['unmarkedMap', 'unfrozenKey'], item: ['frozenMap', 'frozenKey'] },
+			/* 25 */ { human: "Thanks", auto: 26 },
 
 
             
-            /* 25 */ { npc: " (He seems content and has nothing else to say)", isEnd: true, }
+            /* 26 */ { npc: " (He seems content and has nothing else to say)", isEnd: true, }
 
             
 

@@ -30,6 +30,7 @@ class Character extends Thing {
 		this.items[item].collected = false;
 	}
 
+
 	hasSurfaced(label) {
 		if (!this.items[label]) return false;
 		if (Array.isArray(label)) {
@@ -40,6 +41,26 @@ class Character extends Thing {
 		}
 		return this.items[label].surfaced;
 	}
+/*
+//there's something i might wanna try, but I'm not gonna do it until later
+    sinkItem(item) {
+		this.items[item].surfaced = false;
+	}
+
+
+	hasSurfaced(label) {
+		if (Array.isArray(label)) {
+			for (let i = 0; i < label.length; i++) {
+				if (!this.items[label]) return false;
+			}
+			return label.every(l => l.surfaced);
+		}
+        else if (!this.items[label]) return false;
+		return this.items[label].surfaced;
+	}
+
+
+*/
 
 	hasCollected(label) {
 		if (Array.isArray(label)) {

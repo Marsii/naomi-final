@@ -1,36 +1,44 @@
 class PlantAlienFixing extends NPC {
 	constructor(x, y, spriteSheet) {
 		super(x, y, spriteSheet, 'MediumSpringGreen', 'LightCyan');
-//currently untested - computer unreliable but I still want to try to make progress and migrate the dialogue from the old code. Likely contains mistakes/errors. 
+//currently partially untested, for now - 12-18. Once known to work on it's own, it can be moved to the proper place and the ship actually disabled while doing this. 
+//I'd include this in plant alien's code, but i'm pretty sure location is a constant so i can't move them.
 		this.dialog = [ 
 
-            /* 0 */ { npc: "Hey, what's up?" },
-			/* 1 */ { human: "Hey, do you have something I can use to get off this planet?" },
-			/* 2 */ { npc: "Depends. What do you need?" },
-			/* 3 */ { human: "Well I see you have a ship behind you, any chance you could repair and upright mine?"  },
-			/* 4 */ { npc: "Maybe? I built that ship, so I might be able to repair yours. Can't upright it though. What species made it?" },
-			/* 5 */ { human: "I'm - not really sure.... There is some human tech but I don't recognize everything on it. Things are sorta foggy for me, probably thanks to the crash." },
-			/* 6 */ { npc: "Interesting. It might be makeshift ship. Some species around here like to abduct others and make use of their tech. I can probably repair it." },
-			/* 7 */ { human: "Alright, so what do you want in exchange?" },
-            /* 8 */ { npc: "Exchange? I was gonna do it for free but whatever, I won't waste this opportunity..." },
-			/* 9 */ { npc: "How about some non-essentials from 'your' ship, and some technology from your species?" },
-            /* 10 */ { human: "Umm, I don't really have much of my own tech on me." },
-            /* 11 */ { npc: "Well just give me whatever you can spare. Hm, if you also get me a piece of that anomaly up there I'll fix your ship.", surface:'backupLog', surface: 'anomalyPiece' }, 
-            /* 12 */ { human: "I can probably manage that." },
-            /* 13 */ { npc: "Great, let me know when you have everything."} ,
+            /* 0 */ { npc: "(...)", auto:1 , default: 0  }, 
+			/* 1 */ { needsSurfaced:"fixShip", animation:"plantFixingShip", human: "!!. H-hi. You appeared so suddenly." }, //ship would be disabled here or in last ran line of regular plant alien's code
+			/* 2 */ { npc: "Hey. I'm just looking over your ship, it doesn't look too bad. It won't take me too long." },
+			/* 3 */ { human: "Okay."  },
+			/* 4 */ { npc: "I'll just fix it then spend some time studying it and gathering data if that's alright with you." },
+			/* 5 */ { human: "Sure, take as long as you want. There's other things I can do in a meantime" },
 
 
-            /* 14 */ { npc: "*They have nothing else to say to you right now.*", auto: 15, default: 14},
+			/* 6 */ { human: "(You have nothing else to say to them right now.)", auto:[7], default:6 },
 
-            /* 15 */ { needsCollected: ['backuplog', 'anomalyPiece'], npc: "I see you got your tech and the piece. I'll enjoy studying it both. Thanks.", next:16},
+			/* 7 */ { needsSurfaced: "alienDevice", human: "Hey, do have any thing that could make someone less intimidating?" },
+            /* 8 */ { npc: "I've been working on a device like that for a while. I've made a few prototypes, but none fully work." },
+			/* 9 */ { npc: "-Now, that I think about it, your ship might just give me what I need to complete them!" },
+            /* 10 */ { human: "...You're not gonna steal something from my ship are you?" },
+            /* 11 */ { npc: "Of course not, it just gave me inspiration. Here, you can take this prototype device for now.", item:'badDevice'}, 
+            /* 12 */ { npc: "I'll give you a properly working once I'm back at my workshop. Just let me know once you really need me to head over there." },
+            /* 13 */ { human: "Will do."} ,
+            /* 14 */ { npc: "In the meantime, I'll keep gathering extra data from your ship. I won't be able to come back to it afterall."},
+            /* 15 */ { human: "Won't be able to come back? Why not? I wouldn't mind if you wanted to take another look."},
 
-            /* 16 */ { npc: "Alright great, I'll start fixing your ship", next:16 },
+            /* 16 */ { npc: "I can only teleport twice a day." },
+            /* 17 */ { human: "Hmm, good to know.", next:19 },
+            
+            /* 18 */ { npc: "(They continue with their work.)", next: 19 },
 
-            /*Hmm I'm not quite sure how to progress with this one further. I'd assume using the requirements class could work, but I'm not sure how exactly. */
+            /* 19 */ { npc: "(Ask them to go back to their workshop? They won't leave it after this)", response: ' [1] Yes || [2] No ', a: 20, b: 18 },
+            
+            /* 20 */ { npc: "Alright, are you sure?", response: " [1] Yeah, I'm sure || [2] Wait a minute... ", a: 22, b: 21 },
+            /* 21 */ { human: "Actually, no not yet.", next:18 },
 
-            /*Basically after you get the two things they ask, they offer to fix your ship. You need them to do this at least once. They should be near your ship for 90 seconds (allowing you time to steal theirs if you have the key).  */
+            /* 22 */ { npc: "Okay, I'll see you there", surface:'fixingComplete', animation: 'plantFixDone', next: 23 },
 
-            /*You also need to be able to ask them for a device to help out CreepyAlien. They can give you the incomplete device before they finish completing the ship if you ask for the prototype, or they can give you the complete version after (which will make the ship harder to steal later, if it can be stolen at all). */
+            /* 23 */ { npc: "(They've left. You can now continue using your ship.)", isEnd: true, } //ship renabled here
+
 
 
 		];
@@ -43,50 +51,5 @@ class PlantAlienFixing extends NPC {
 
 /*
 
-            if (this.plantAlien.dialogCount == 7) {
-                dialog = "(They have nothing else to say to you right now.)"
-                if (this.backuplog == true) {
-                    this.plantAlien.dialogCount == 10
-                }
-            } else if (this.plantAlien.dialogCount == 7.5) {
-                this.plantAlien.dialogCount = 7;
-            }
-
-            if (this.afufilled == true && this.bfufilled == true) {
-                this.plantAlien.dialogCount = 15;
-            }
-
-            if (this.plantAlien.dialogCount == 15) {
-                dialog = "Alright, I'll start fixing your ship"
-                // Position needs to change to near ship.
-            } else if (this.plantAlien.dialogCount == 15.5) {
-                this.startcounter = true;
-                this.plantAlien.dialogCount = 17;
-            }
-
-
-            if (this.plantAlien.dialogCount == 21.5) {
-                humanDialogP = "Do you have anything that could make someone come off as less intimidating?"
-            } else if (this.plantAlien.dialogCount == 22) {
-                dialog = "Yeah, I'm working on a device to do that. It works, but it's not quite finished. I can give you a complete one after I'm done here."
-            } else if (this.plantAlien.dialogCount == 22.5) {
-                humanDialogP = "Can I see a prototype?"
-            } else if (this.plantAlien.dialogCount == 23) {
-                dialog = "Sure, here you go."
-                this.baddevice = true;
-                this.deviceNeed = false;
-            }
-
-
-
-            if (this.plantAlien.dialogCount == 17) {
-                if (this.deviceNeed == true) {
-                    this.plantAlien.dialogCount = 21.5;
-                }
-                dialog = "*They're currently fixing your ship and you have nothing to say to them*"
-            } else if (this.plantAlien.dialogCount == 17.5) {
-                this.plantAlien.dialogCount = 17;
-            }
-            
             
 */

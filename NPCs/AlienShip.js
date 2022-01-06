@@ -32,9 +32,13 @@ class AlienShip extends NPC {
 		this.requirements = [
 			{ needed: "You need an unfrozen, marked map", achieved: "You have a marked map", done: false },
 			{ needed: "You need an unfrozen key", achieved: "You have the unfrozen key", done: false },
-			{ needed: "You need a battery with energy", achieved: "Your battery has energy", done: false },
+			{ needed: "You need a battery with full energy", achieved: "Your battery has energy", done: false },
 			{ needed: "You need to be alone with the ship.", achieved: "You're alone with the ship.", done: false },
 		];
+
+// I'm unsure of how to get it to count requirements (on either ship). and if a requirement can include a change of animation.
+//Perhaps I should do some work on the ending scenes? I know what I want to do for them, but drawing the different end pictures (with possible animations will take a while). I may have to test them seperately first when done, then add them here (to this project).
+// I'm doing work on them but drawing them takes a while. Despite the small size, the art is hard to get to look right
 
 	}
 }

@@ -1,7 +1,7 @@
 class PlantAlien extends NPC {
 	constructor(x, y, spriteSheet) {
 		super(x, y, spriteSheet, 'MediumSpringGreen', 'LightCyan');
-//currently untested - computer unreliable but I still want to try to make progress and migrate the dialogue from the old code. Likely contains mistakes/errors. 
+//currently untested - may contain mistakes/error near end. 
 		this.dialog = [ 
 
             /* 0 */ { npc: "Hey, what's up?" },
@@ -15,25 +15,43 @@ class PlantAlien extends NPC {
             /* 8 */ { npc: "Exchange? I was gonna do it for free but whatever, I won't waste this opportunity..." },
 			/* 9 */ { npc: "How about some non-essentials from 'your' ship, and some technology from your species?" },
             /* 10 */ { human: "Umm, I don't really have much of my own tech on me." },
-            /* 11 */ { npc: "Well just give me whatever you can spare. Hm, if you also get me a piece of that anomaly up there I'll fix your ship.", surface: 'anomalyPiece'}, 
+            /* 11 */ { npc: "Well just give me whatever you can spare. Hm, if you also get me a piece of that anomaly to the left of my tree I'll fix your ship.", surface: 'anomalyPiece'}, 
             /* 12 */ { human: "I can probably manage that.", surface:'backupTech' },
             /* 13 */ { npc: "Great, let me know when you have everything."} ,
 
 
             /* 14 */ { npc: "*They have nothing else to say to you right now.*", auto: 15, default: 14},
 
-            /* 15 */ { needsCollected: ['backupTech', 'anomalyPiece'], npc: "I see you got your tech and the piece. I'll enjoy studying them both. Thanks.", next:16},
+            /* 15 */ { needsCollected: ['backupTech', 'anomalyPiece'], npc: "I see you got your tech and the piece. I'll enjoy studying them both. Thanks.", next:17},
 
-            /* 16 */ { npc: "Alright great, I'll start fixing your ship", next:16 },
-            /* 17 */ { npc: "Alright great, I'll start fixing your ship", next:16 },
+            
+            /* 16 */ { npc: "*They'll continue waiting for your go ahead.*", next: 17},
 
-            /*Hmm I'm not quite sure how to progress with this one further. I'd assume using the requirements class could work, but I'm not sure how exactly. */
+            /* 17 */ { npc: "Do you want me to start fixing your ship?", response: ' [1] Yes || [2] No ', a: 18, b: 19 },
+            
+            /* 18 */ { npc: "Are you sure? I won't be able to leave your ship until I'm absolutely done. And you won't be able to access it while I'm there.", response: " [1] Yup, I'm sure || [2] On second thought... ", a: 20, b: 19 },
+            /* 19 */ { human: "No, not yet, I still have a few things I need to do.", next:16 },
 
-            /*Basically after you get the two things they ask, they offer to fix your ship. You need them to do this at least once. They should be near your ship for 90 seconds (allowing you time to steal theirs if you have the key).  */
+            /* 20 */ { npc: "Alright, I'll head over there now. See ya, there", next:21 },
+            /* 21 */ { human: "(Woah, I didn't think they'd just disappear. I'm suprised they trust me enough to leave me alone in their workshop.)", surface:'fixShip', animation: 'goneFixing', next: 22 },
 
-            /*You also need to be able to ask them for a device to help out CreepyAlien. They can give you the incomplete device before they finish completing the ship if you ask for the prototype, or they can give you the complete version after (which will make the ship harder to steal later, if it can be stolen at all). */
+            /* 22 */ { human: "(...)", auto: 23 , default: 22 },
+
+            //character disappears to go work on the ship. Leaves opportunity to be alone with the ship. Returns once you tell them to. 
+
+            /* 23 */ { needsSurfaced:'fixingComplete', animation: 'returnPlantQC', npc: "Thanks for letting me fix your ship, I learned a lot :)", next: 25, auto: 24  } ,
+            
+            /* 24 */ { npc: "(They're happy and you have nothing else to say to them.)", next: 25, default: 24 }, 
+
+            /* 25 */ { needsCollected: 'badDevice', human: "So now that you're back here can you fix the device.?"}, 
+            /* 26 */ { npc: "Oh right! To be honest, your ship was just what I needed to help me figure it out. Here ya go.", remove:'badDevice', item:'goodDevice' },
+            /* 27 */ { npc: " (They're happy and you have nothing else to say to them.)", isEnd: true, }
 
 
+            /*Just realized there's an easy way to relate the two events without complicating it with a timer.*/
+
+            /* I really wish I had put dates on the comments, since some seem outdated, but I didn't think that'd be necessary at the time.  */
+            
 		];
 
 
@@ -69,7 +87,12 @@ class PlantAlien extends NPC {
             if (this.plantAlien.dialogCount == 21.5) {
                 humanDialogP = "Do you have anything that could make someone come off as less intimidating?"
             } else if (this.plantAlien.dialogCount == 22) {
-                dialog = "Yeah, I'm working on a device to do that. It works, but it's not quite finished. I can give you a complete one after I'm done here."
+                dialog = "Yeah, I'm working on a device to do that. It's not quite finished, I just couldn't figure it out until now. But your ship has given me a good idea, I can give you a complete one later. 
+                
+                (Human) "Couldn't you do it now? If you're done fixing the ship, you could just come back later when I don't need it. 
+
+
+            I just want to collect as much extra info as I can before then, teleporting isn't easy and I can only do it once more to get back to my homebase. Once you really need it, let me know."
             } else if (this.plantAlien.dialogCount == 22.5) {
                 humanDialogP = "Can I see a prototype?"
             } else if (this.plantAlien.dialogCount == 23) {
